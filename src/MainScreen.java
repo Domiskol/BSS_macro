@@ -28,9 +28,9 @@ public class MainScreen {
 
         panelWest.setLayout(new BoxLayout(panelWest, BoxLayout.Y_AXIS));
 
-        JCheckBox Darkmode = new JCheckBox("IDK");
+        JCheckBox Darkmode = new JCheckBox("DarkMode");
 
-        panelWest.add(Darkmode);
+        this.frame.add(Darkmode, BorderLayout.SOUTH);
 
         JCheckBox checkbox2 = new JCheckBox("dd");
 
@@ -44,22 +44,18 @@ public class MainScreen {
         this.frame.add(panelWest, BorderLayout.WEST);
 
 
+
+
+        // inicializace dark mode
         ChangeBackround backround = new ChangeBackround(this.frame);
         backround.change(Darkmode);
 
 
+        // F4, F5
+        GlobalKeyHandler.start(this.frame);
 
 
-        Action hideAction = new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-            }
-        };
 
-        panelWest.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("F5"), "hideFrame");
-
-        panelWest.getActionMap().put("hideFrame", hideAction);
 
 
 

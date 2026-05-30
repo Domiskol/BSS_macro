@@ -7,9 +7,12 @@ import javax.swing.JFrame;
 public class GlobalKeyHandler implements NativeKeyListener{
 
     private JFrame frame;
+    private Thread sThread;
+    private RobotThread currentTask;
 
     public GlobalKeyHandler(JFrame frame) {
         this.frame = frame;
+
     }
 
     @Override
@@ -18,8 +21,19 @@ public class GlobalKeyHandler implements NativeKeyListener{
             if (frame.isVisible()) {
                 frame.setVisible(false);
             }
+
+            if (sThread == null || !sThread.isAlive()) {
+                currentTask = new RobotThread();
+                sThread = new Thread(currentTask);
+                sThread.start();
+            }
         }
         if (e.getKeyCode() == NativeKeyEvent.VC_F5){
+
+            if (currentTask != null) {
+                currentTask.stopMacro();
+            }
+
             if (!frame.isVisible()){
                 frame.setVisible(true);
             }

@@ -12,6 +12,7 @@ public class MainScreen {
     private JFrame frame;
 
     public MainScreen() {
+        // Apply the modern FlatLaf Dark theme before initializing any GUI components
         try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception e) {
@@ -23,14 +24,15 @@ public class MainScreen {
 
 
     public void showMainScreen(){
+        // Set basic window properties
         this.frame.setSize(700, 450);
         this.frame.setLayout(new BorderLayout());
         this.frame.setLocationRelativeTo(null);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
-
+        // Create the main tabbed pane navigation
         JTabbedPane tabbedPane = new JTabbedPane();
-
+        // Using GridBagLayout for precise positioning of labels and dropdowns
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
@@ -40,17 +42,19 @@ public class MainScreen {
         gbc.gridx = 0; gbc.gridy = 1; gbc.gridwidth = 2;
         mainPanel.add(hotkeyLabel, gbc);
 
+        // Quest selection row
         gbc.gridwidth = 1;
         gbc.gridx = 0; gbc.gridy = 2;
-        mainPanel.add(new JLabel("Aktivní úkol:"), gbc);
+        mainPanel.add(new JLabel("Active quest:"), gbc);
 
-        String[] bears = { "Žádný", "Polar Bear", "Black Bear", "Science Bear" };
+        String[] bears = { "None", "Polar Bear", "Black Bear", "Science Bear" };
         JComboBox<String> bearComboBox = new JComboBox<>(bears);
         gbc.gridx = 1; gbc.gridy = 2;
         mainPanel.add(bearComboBox, gbc);
 
+        // Field selection row
         gbc.gridx = 0; gbc.gridy = 3;
-        mainPanel.add(new JLabel("Pole na farmení:"), gbc);
+        mainPanel.add(new JLabel("field for farming"), gbc);
 
         String[] fields = { "Clover Field", "Pumpkin Patch", "Pineapple Patch", "Dandelion" };
         JComboBox<String> fieldComboBox = new JComboBox<>(fields);
@@ -63,25 +67,26 @@ public class MainScreen {
         gbcSettings.insets = new Insets(8, 8, 8, 8);
         gbcSettings.anchor = GridBagConstraints.WEST;
 
-        JCheckBox convertHoneyCheck = new JCheckBox("Automaticky převádět med u úlu");
+        JCheckBox convertHoneyCheck = new JCheckBox("Automatically transfer honey in the hive");
         convertHoneyCheck.setSelected(true);
         gbcSettings.gridx = 0; gbcSettings.gridy = 0;
         settingsPanel.add(convertHoneyCheck, gbcSettings);
 
-        JCheckBox killMobsCheck = new JCheckBox("Zabíjet brouky po cestě (Werewolf/Spider)");
+        JCheckBox killMobsCheck = new JCheckBox("Kill monsters by the way");
         gbcSettings.gridx = 0; gbcSettings.gridy = 1;
         settingsPanel.add(killMobsCheck, gbcSettings);
 
-
+        // Reset timer configuration panel
         JPanel resetTimePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-        resetTimePanel.add(new JLabel("Resetovat postavu každých "));
+        resetTimePanel.add(new JLabel("Reset character every "));
         JSpinner minutesSpinner = new JSpinner(new SpinnerNumberModel(15, 5, 60, 1));
         resetTimePanel.add(minutesSpinner);
-        resetTimePanel.add(new JLabel(" minut."));
+        resetTimePanel.add(new JLabel(" minutes."));
         gbcSettings.gridx = 0; gbcSettings.gridy = 2;
         settingsPanel.add(resetTimePanel, gbcSettings);
-        tabbedPane.addTab("Hlavní menu", mainPanel);
-        tabbedPane.addTab("Nastavení chování", settingsPanel);
+        // Add configured tabs to the main tabbed pane
+        tabbedPane.addTab("Main menu", mainPanel);
+        tabbedPane.addTab("Behaviour settings", settingsPanel);
         this.frame.add(tabbedPane, BorderLayout.CENTER);
 
         JPanel southPanel = new JPanel(new BorderLayout());
@@ -95,7 +100,7 @@ public class MainScreen {
                 } else {
                     UIManager.setLookAndFeel(new FlatLightLaf());
                 }
-                SwingUtilities.updateComponentTreeUI(frame);
+                SwingUtilities.updateComponentTreeUI(frame); // Dynamic UI refresh
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -105,7 +110,7 @@ public class MainScreen {
         this.frame.add(southPanel, BorderLayout.SOUTH);
 
 
-        // F4, F5
+        // Initialize background keyboard tracking
         GlobalKeyHandler.start(this.frame);
 
 

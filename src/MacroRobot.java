@@ -54,6 +54,7 @@ public class MacroRobot {
             robot.keyRelease(KeyEvent.VK_S);
         }
     }
+    // simulates any keypress
     public void pressKey(int keyCode, int duration) {
         try {
             robot.keyPress(keyCode);
@@ -63,6 +64,7 @@ public class MacroRobot {
             Thread.currentThread().interrupt();
         }
     }
+    // simulates left click
     public void click() {
         robot.mousePress(java.awt.event.InputEvent.BUTTON1_DOWN_MASK);
         robot.mouseRelease(java.awt.event.InputEvent.BUTTON1_DOWN_MASK);

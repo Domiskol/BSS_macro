@@ -17,9 +17,41 @@ public class MacroRobot {
         try {
             robot.keyPress(KeyEvent.VK_W);
             Thread.sleep(duration);
-            robot.keyRelease(KeyEvent.VK_W);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
+        } finally {
+            robot.keyRelease(KeyEvent.VK_W);
+        }
+
+    }
+    public void walkD(int duration) {
+        try {
+            robot.keyPress(KeyEvent.VK_D);
+            Thread.sleep(duration);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } finally {
+            robot.keyRelease(KeyEvent.VK_D);
+        }
+    }
+    public void walkA(int duration) {
+        try {
+            robot.keyPress(KeyEvent.VK_A);
+            Thread.sleep(duration);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } finally {
+            robot.keyRelease(KeyEvent.VK_A);
+        }
+    }
+    public void walkBackwards(int duration) {
+        try {
+            robot.keyPress(KeyEvent.VK_S);
+            Thread.sleep(duration);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } finally {
+            robot.keyRelease(KeyEvent.VK_S);
         }
     }
     public void pressKey(int keyCode, int duration) {
@@ -34,6 +66,17 @@ public class MacroRobot {
     public void click() {
         robot.mousePress(java.awt.event.InputEvent.BUTTON1_DOWN_MASK);
         robot.mouseRelease(java.awt.event.InputEvent.BUTTON1_DOWN_MASK);
+        try{
+            Thread.sleep(200);
+        }catch(InterruptedException e){
+            Thread.currentThread().interrupt();
+            return;
+        }
+    }
+
+
+    public void moveMouseTo(int x, int y) {
+        robot.mouseMove(x, y);
     }
 
 }

@@ -3,6 +3,5 @@ public class Main{
 
         MainScreen screen = new MainScreen();
         screen.showMainScreen();
-
     }
 }

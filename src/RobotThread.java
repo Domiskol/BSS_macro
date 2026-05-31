@@ -24,11 +24,31 @@ public class RobotThread implements Runnable {
 
             if (!running) break;
             currentBear.walkToBear(robot);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
+
             if (!running) break;
             currentBear.claimQuest(robot);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
 
             if (!running) break;
             currentBear.doQuestLogic(robot);
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
 
 
         }
